@@ -8,6 +8,7 @@ class GameScene:SKScene {
     let character4:SKSpriteNode = SKSpriteNode(imageNamed: "snail_00");
     let background:SKSpriteNode = SKSpriteNode(imageNamed: "natural-environment-lanscape-scene_1308-33532.jpg.webp");
     let timer:SKLabelNode = SKLabelNode(text: "0.00");
+    let result:SKLabelNode = SKLabelNode(text: "");
     var endDistance:Double = 0;
     var startDistance:Double = 50;
     var distance:Double = 0;
@@ -59,22 +60,27 @@ class GameScene:SKScene {
         timer.fontSize = 40;
         timer.fontName = "Arial";
         addChild(timer);
+        
+        result.position = CGPoint(x:150, y:50);
+        result.fontSize = 20;
+        result.fontName = "Arial";
+        addChild(result);
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if(distance >= background.size.width - startDistance - endDistance) {
             finished = true;
             if (time < char4Time) {
-                print("First place!")
+                result.text = "You got first place!";
             }
             else if (time < char3Time) {
-                print("Second place!")
+                result.text = "You got second place!";
             }
             else if (time < char2Time) {
-                print("Third place!")
+                result.text = "You got third place!";
             }
             else {
-                print("Fourth place!")
+                result.text = "You got fourth place!";
             }
             return;
         }
