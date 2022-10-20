@@ -9,6 +9,7 @@ class GameScene:SKScene {
     let background:SKSpriteNode = SKSpriteNode(imageNamed: "natural-environment-lanscape-scene_1308-33532.jpg.webp");
     let timer:SKLabelNode = SKLabelNode(text: "0.00");
     let result:SKLabelNode = SKLabelNode(text: "");
+    let replay:SKLabelNode = SKLabelNode(text: "Replay");
     var endDistance:Double = 0;
     var startDistance:Double = 50;
     var distance:Double = 0;
@@ -65,9 +66,20 @@ class GameScene:SKScene {
         result.fontSize = 20;
         result.fontName = "Arial";
         addChild(result);
+        
+        replay.position = CGPoint(x:270, y:10);
+        replay.fontSize = 30;
+        replay.fontName = "Arial";
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (finished) {
+            let location = touches.first?.location(in: replay);
+            if ((location?.x.magnitude)! < 40 && (location?.y.magnitude)! < 40) {
+                
+            }
+            return;
+        }
         if(distance >= background.size.width - startDistance - endDistance) {
             finished = true;
             if (time < char4Time) {
@@ -82,6 +94,7 @@ class GameScene:SKScene {
             else {
                 result.text = "You got fourth place!";
             }
+            addChild(replay);
             return;
         }
         if (snailHeight == 80) {
