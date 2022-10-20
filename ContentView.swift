@@ -22,6 +22,23 @@ class GameScene:SKScene {
     let char3Time = Double.random(in: 20..<29);
     let char4Time = Double.random(in: 10..<19);
     
+    func reset() {
+        time = 0;
+        distance = 0;
+        endDistance = 0;
+        backgroundOffset = 0;
+        timer.text = "0.00";
+        result.text = "";
+        finished = false;
+        character.removeAllActions();
+        character2.removeAllActions();
+        character3.removeAllActions();
+        character4.removeAllActions();
+        background.removeAllActions();
+        removeAllChildren();
+        sceneDidLoad();
+    }
+    
     override func sceneDidLoad() {
         var screenHeight:CGFloat = UIScreen.main.bounds.height;
         var screenWidth:CGFloat = UIScreen.main.bounds.width;
@@ -76,7 +93,7 @@ class GameScene:SKScene {
         if (finished) {
             let location = touches.first?.location(in: replay);
             if ((location?.x.magnitude)! < 40 && (location?.y.magnitude)! < 40) {
-                
+                reset();
             }
             return;
         }
