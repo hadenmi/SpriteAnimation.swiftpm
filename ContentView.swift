@@ -10,6 +10,7 @@ class GameScene:SKScene {
     let timer:SKLabelNode = SKLabelNode(text: "0.00");
     let result:SKLabelNode = SKLabelNode(text: "");
     let replay:SKLabelNode = SKLabelNode(text: "Replay");
+    var startTime:Double = 0;
     var endDistance:Double = 0;
     var startDistance:Double = 50;
     var distance:Double = 0;
@@ -129,8 +130,11 @@ class GameScene:SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if (finished) {return}
-        time += 1/60;
+        if (finished || startTime == 0) {
+            startTime = currentTime
+            return
+        }
+        time = currentTime - startTime;
         timer.text = String(round(time*100)/100);
     }
 }
